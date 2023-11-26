@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include("./partials/head") %>
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include("./partials/nav") %> 
+    
+      <% if (locals.districts && locals.districts.length>0) { %>
+        <table class="table mt-3 ">
+          <thead> 
+            <tr>
+              <th scope="col">S No.</th>
+              <th scope="col">District</th>
+              <th scope="col">Markets</th>
+            </tr>
+          </thead>
+          <tbody>
+        <% districts.forEach((district,index) => { %>
+            <tr>
+              <td><%= index+1 %></td>
+              <td><%= district.districtName %></td>
+              <td><a href="/districts/<%= district._id %>"><button class="btn btn-primary">View</button></a></td>
+            </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <% } else {%> 
+      <div class="mx-3">
+        <p class="my-3"> No data Available</p>
+      </div>
+    <% } %> 
+
+    <% if (locals.user) { %>
+    <div class="container my-3">
+      <h4>Add District:</h4>
+      <form action="/districts" method="post">
+        <label for="inputDistrict" class="form-label mt-3">District Name</label>
+        <input
+          type="text"
+          id="inputDistrict"
+          class="form-control"
+          name="district"
+        />
+        <button class="btn btn-primary my-3" type="submit">Submit</button>
+      </form>
+    </div>
+    <% } %> <%- include("./partials/script") %>
+  </body>
+</html>

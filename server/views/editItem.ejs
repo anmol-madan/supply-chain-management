@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %> 
+     <% if (locals.user) { %>
+    <div class="container my-3">
+      <h4>Edit Item:</h4>
+      <form action="/market/<%=marketData._id%>/<%=itemData._id %> " method="post">
+    
+        <label for="inputItemQuantity" class="form-label mt-3">Item Quantity(in kgs.)</label>
+        <input
+          type="text"
+          value="<%= itemData.itemQuantity%>"
+          id="inputItemQuantity"
+          class="form-control"
+          name="itemQuantity"
+        />
+        <label for="inputItemPrice" class="form-label mt-3">Item Price</label>
+        <input
+          type="text"
+          id="inputItemPrice"
+          value="<%= itemData.itemPrice%>"
+          class="form-control"
+          name="itemPrice"
+        />
+        <button class="btn btn-primary my-3" type="submit">Submit</button>
+      </form>
+    </div>
+    <%}%> <%- include('./partials/script') %>
+  </body>
+</html>

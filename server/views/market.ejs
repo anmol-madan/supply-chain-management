@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Document</title>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <% if (locals.markets && locals.markets.length>0) { %>
+      <table class="table mt-3 ">
+        <thead> 
+          <tr>
+            <th scope="col">S No.</th>
+            <th scope="col">District</th>
+            <th scope="col">Markets</th>
+          </tr>
+        </thead>
+        <tbody>
+      <% markets.forEach((market,index) => { %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= market.marketName %></td>
+            <td><a href="/market/<%= market._id %>"><button class="btn btn-primary">View</button></a></td>
+          </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <% } else {%> 
+    <div class="mx-3">
+      <p class="my-3"> No data Available</p>
+    </div>
+  <% } %> 
+
+    <% if (locals.user) { %>
+    <div class="container my-3">
+      <h4>Add Market:</h4>
+      <form action="/districts/<%=districtData._id%>" method="post">
+        <label for="inputMarket" class="form-label mt-3">Market Name</label>
+        <input
+          type="text"
+          id="inputMarket"
+          class="form-control"
+          name="market"
+        />
+        <button class="btn btn-primary my-3" type="submit" onclick="">Submit</button>
+      </form>
+    </div>
+    <% } %>
+    <%- include('./partials/script') %>
+  </body>
+</html>
